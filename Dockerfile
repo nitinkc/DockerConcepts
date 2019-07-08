@@ -2,7 +2,8 @@
 FROM alpine
 
 # Download and install dependency
-RUN npm install
+RUN apk add --update redis
+#RUN apk add --update gcc
 
 # Tell the image what to do when it starts as a container
-CMD ["npm","start"]
+CMD ["redis-server"]
