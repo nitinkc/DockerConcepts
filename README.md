@@ -1,7 +1,29 @@
 # DockerConcepts
 
-MySql mysql_learning
+## Important Docker Commands
 
+```sh
+docker ps --all
+docker system prune
+
+ docker run --publish 5000:5000 -t nitinkc/messenger:0.0.1-SNAPSHOT\n
+
+# Show all containers
+ sudo docker ps -a
+ sudo docker ps -aq
+
+ # Remove Containers
+ docker container rm 6d0806087e50
+ docker container rm 8cf7ae980534
+
+ docker system prune
+ docker ps -l
+```
+
+
+## MySql mysql_learning
+
+```sh
 docker pull MySql
 
 docker run -d \
@@ -13,3 +35,4 @@ docker run -d \
   mysql
 
 docker exec -it mysql_learning mysql -uroot -p
+```
