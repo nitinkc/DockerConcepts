@@ -34,13 +34,17 @@ docker run --publish 5000:5000 -t nitinkc/messenger-app:my-angular-app
 # To list all running Docker containers
 docker ps --all
 
-List all containers, both running and stopped
+# List all containers, both running and stopped
+sudo docker ps -a
+sudo docker ps -aq #quiet
+
+
 docker system prune
 
 
 # Show all containers
- sudo docker ps -a
- sudo docker ps -aq
+
+
 
  # Remove Containers
  docker container rm 6d0806087e50
