@@ -21,11 +21,10 @@
 
 ```sh
 docker login --username=nitinkc
-docker tag 33a7bad180b7 nitinkc/messenger-app:my-angular-app
-docker push nitinkc/messenger-app
-docker pull nitinkc/messenger-app:my-angular-app
-docker run --publish 5000:5000 -t nitinkc/messenger-app:my-angular-app
-
+docker tag 33a7bad180b7 nitinkc/todo-app:todo-backend16
+docker push nitinkc/todo-app
+docker pull nitinkc/todo-app:todo-backend16
+docker run --publish 5005:5005 -t nitinkc/todo-app:todo-backend16
 ```
 
 ## Important Docker Commands
@@ -43,7 +42,6 @@ docker system prune
 
 
 # Show all containers
-
 
 
  # Remove Containers
