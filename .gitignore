@@ -21,3 +21,5 @@ frontend/build
 npm-debug.log*git
 yarn-debug.log*
 yarn-error.log*
+
+.idea/

@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest #postgres:13.1
+#    healthcheck:
+#      test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "root" ]
+#      timeout: 45s
+#      interval: 10s
+#      retries: 10
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d/
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/1.sql
+#      - ./db/data.sql:/docker-entrypoint-initdb.d/2.sql
+    ports:
+      - 5432:5432
+#    networks:
+#      - initexample
+#  metabase:
+#    image: metabase/metabase:latest
+#    depends_on:
+#      - postgres
+#    ports:
+#      - 3000:3000
+#    networks:
+#      - initexample
+
+networks:
+  initexample:
+    driver: bridge
