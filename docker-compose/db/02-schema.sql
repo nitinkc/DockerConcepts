@@ -1,8 +1,10 @@
--- Create a schema named 'myschema'
-CREATE SCHEMA IF NOT EXISTS test;
-
+-- Connect to the new database
+\connect mydb nichaurasia;
 -- Use the 'myschema' schema
 SET search_path TO test;
+
+-- Create a schema named 'myschema'
+CREATE SCHEMA IF NOT EXISTS test;
 
 DROP TABLE IF EXISTS student;
 
