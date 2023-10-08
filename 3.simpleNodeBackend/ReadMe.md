@@ -1,16 +1,20 @@
+# Build an executable
+
+For Node application, the build process can happen within the container.
+
 # Build the docker image
 
 ```shell
-docker build -t nitinkc/simple-web-app:latest .
+docker build -t nitinkc/simple-node-backend:latest .
 ```
 
 # Run the image to make it a container
 
 ```dockerfile
 docker run \
-	--name=simple_webapp \
+	--name=simple_nodeapp \
 	-d \
-	-p 8080:3000 nitinkc/simple-web-app
+	-p 8080:3000 nitinkc/simple-node-backend
 ```
 
 # Stop container from command prompt
