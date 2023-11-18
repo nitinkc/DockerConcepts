@@ -5,6 +5,7 @@ services:
       context: .
       dockerfile: Dockerfile.dev
     image: nitinkc/simple-react-frontend:latest
+    container_name: react-frontend
     ports:
       - "3000:3000"
     volumes:

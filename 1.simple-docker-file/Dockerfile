@@ -1,5 +1,6 @@
 # Use an existing docker image as a base
 FROM openjdk:21-jdk
+#FROM scratch
 
 # Take the file from host machine into the container. (.) is current directory w.r.t Dockerfile is located
 # `/usr/src/myapp` : destination path inside the Docker image
