@@ -1,6 +1,8 @@
 ```shell
 docker rm simple_javaapp
 docker rmi nitinkc/simple-java-app
+
+cd 1.simple-docker-file
 docker build -t nitinkc/simple-java-app .
 
 docker run \

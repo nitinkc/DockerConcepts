@@ -1,13 +1,24 @@
 version: '3.8'
 
 services:
+
+  postgres-init:
+    image: postgres:latest
+    command: [ "bash", "-c", "sleep 10 && psql -U dbuser -c 'CREATE DATABASE mydb;' && psql -U dbuser -c 'GRANT ALL PRIVILEGES ON DATABASE app_mydb TO dbuser;'" ]
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+    networks:
+      - initexample
+
   postgres:
     image: postgres:latest #postgres:13.1
-#    healthcheck:
-#      test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "root" ]
-#      timeout: 45s
-#      interval: 10s
-#      retries: 10
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-d", "mydb", "-U", "dbuser", "-p","a" ]
+      timeout: 45s
+      interval: 10s
+      retries: 3
     restart: always
     env_file:
       - .env
@@ -15,8 +26,8 @@ services:
       - ./db:/docker-entrypoint-initdb.d/
     ports:
       - 5432:5432
-#    networks:
-#      - initexample
+    networks:
+      - initexample
 #  metabase:
 #    image: metabase/metabase:latest
 #    depends_on:

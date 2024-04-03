@@ -11,5 +11,10 @@ WORKDIR /usr/src/java/myapp
 
 RUN javac *.java
 
+# Docker only allows one CMD instruction per Dockerfile, and it should be the last instruction, as it specifies the default command to run when the container starts
+
+# Run HelloWorld
 CMD ["java", "HelloWorld"]
+
+# Run Calculator with add operation
 CMD ["java", "Calculator", "add", "5", "3"]
