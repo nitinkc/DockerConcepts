@@ -1,9 +1,9 @@
 #!/bin/bash
 set -e # Exit immediately if any command in the script exits with a non-zero status, indicating an error.
 
-echo "The user is $APP_DB_USER"
+echo "Running init.sh.... reading .env file"
 
-# Execute SQL commands using psql
+# Execute SQL commands using psql with the DEFAULT USER
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
   -- Create the appdbuser if it doesn't exist
   CREATE ROLE $APP_DB_USER LOGIN PASSWORD '$APP_DB_PASS';
@@ -13,6 +13,8 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-E
   -- Grant all privileges on the database to the appdbuser
   GRANT ALL PRIVILEGES ON DATABASE $APP_DB_NAME TO $APP_DB_USER;
 EOSQL
+
+echo "The user is $APP_DB_USER"
 
 psql -v ON_ERROR_STOP=1 --username "$APP_DB_USER" --dbname "$APP_DB_NAME" <<-EOSQL
   -- Create a new schema if it doesn't exist

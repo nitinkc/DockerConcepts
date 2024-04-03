@@ -2,20 +2,35 @@ version: '3.8'
 
 services:
 
-  postgres-init:
-    image: postgres:latest
-    command: [ "bash", "-c", "sleep 10 && psql -U dbuser -c 'CREATE DATABASE mydb;' && psql -U dbuser -c 'GRANT ALL PRIVILEGES ON DATABASE app_mydb TO dbuser;'" ]
-    env_file:
-      - .env
-    depends_on:
-      - postgres
+  # Another service that echoes a message every time it starts
+  echo-service:
+    image: alpine:latest
+    command: ["echo", "ENABLE_POSTGRES_INIT=${ENABLE_POSTGRES_INIT}, ENABLE_METABASE=${ENABLE_METABASE}"]
     networks:
       - initexample
 
+#  The postgres-init service is conditionally included based on the ENABLE_POSTGRES_INIT environment variable.
+#  If set to true, the service will run.
+#  You can toggle the services on and off by setting these environment variables accordingly in your .env file
+#  postgres-init:
+#    image: postgres:latest
+#    command: [ "bash", "-c", "sleep 10 && psql -U dbuser -c 'CREATE DATABASE mydb;' && psql -U dbuser -c 'GRANT ALL PRIVILEGES ON DATABASE app_mydb TO dbuser;'" ]
+#    env_file:
+#      - .env
+#    depends_on:
+#      - postgres
+#    volumes:
+#      - ./db:/docker-entrypoint-initdb.d/
+#    environment:
+#      - ENABLE_POSTGRES_INIT=${ENABLE_POSTGRES_INIT}
+#    restart: always
+#    networks:
+#      - initexample
+
   postgres:
-    image: postgres:latest #postgres:13.1
+    image: postgres:latest
     healthcheck:
-      test: [ "CMD", "pg_isready", "-q", "-d", "mydb", "-U", "dbuser", "-p","a" ]
+      test: [ "CMD", "pg_isready", "-d", "mydb", "-U", "dbuser"]
       timeout: 45s
       interval: 10s
       retries: 3
@@ -28,6 +43,8 @@ services:
       - 5432:5432
     networks:
       - initexample
+
+#  the metabase service is conditionally included based on the ENABLE_METABASE environment variable. If set to true, the service will run.
 #  metabase:
 #    image: metabase/metabase:latest
 #    depends_on:
@@ -36,6 +53,8 @@ services:
 #      - 3000:3000
 #    networks:
 #      - initexample
+#    environment:
+#      - ENABLE_METABASE=false #${ENABLE_METABASE}
 
 networks:
   initexample:
