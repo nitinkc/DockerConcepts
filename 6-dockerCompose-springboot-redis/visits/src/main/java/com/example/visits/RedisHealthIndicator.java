@@ -6,7 +6,7 @@ import org.springframework.boot.actuate.health.HealthIndicator;
 import org.springframework.stereotype.Component;
 import redis.clients.jedis.Jedis;
 
-@Component
+@Component("redis-health")
 @Slf4j
 public class RedisHealthIndicator implements HealthIndicator {
     @Override
