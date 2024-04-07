@@ -5,7 +5,9 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8080:8080"
+      - "8080:8088"
+      - "8081:8088"
+      - "8082:8088"
     environment:
       SPRING_PROFILES_ACTIVE: "docker"
     depends_on:
@@ -14,9 +16,10 @@ services:
       - my-network
 
   redis-server: #This is the server name that goes in config : new Jedis("redis-server", 6379);
-    image: redis
+    image: redis/redis-stack:latest #redis # redis doesn't provide the UI to visualize
     ports:
       - "6379:6379"
+      - "8001:8001"
     networks:
       - my-network
 

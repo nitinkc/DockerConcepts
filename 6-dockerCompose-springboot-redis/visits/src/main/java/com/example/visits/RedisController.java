@@ -9,20 +9,10 @@ import redis.clients.jedis.Jedis;
 public class RedisController {
 
     @Autowired
-    private Jedis jedis;
+    private RedisService redisService;
 
     @GetMapping("/")
     public String getVisits() {
-        try {
-            String visits = jedis.get("visits");
-            if (visits == null) {
-                visits = "0";
-            }
-            jedis.set("visits", String.valueOf(Integer.parseInt(visits) + 1));
-            return "Number of visits is " + visits;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "Internal Server Error";
-        }
+        return redisService.getNumberOfVisits();
     }
 }
