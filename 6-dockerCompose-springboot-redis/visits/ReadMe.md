@@ -47,6 +47,11 @@ It exposes the port via `- "8080:8088"`
 
 The app is accessible on port `8080` via docker. Within Docker, the app is running on port `8088`
 
+##### Execute the dockerfile
+
+```shell
+docker-compose up --build
+```
 
 [http://localhost:8080/actuator/health](http://localhost:8080/actuator/health)
 
