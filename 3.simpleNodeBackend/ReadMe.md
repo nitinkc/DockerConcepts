@@ -13,10 +13,11 @@ docker build -t nitinkc/simple-node-backend:latest .
 ```dockerfile
 docker run \
 	--name=simple_nodeapp \
-	--detached \
+	-d \
 	--publish 8080:3000 nitinkc/simple-node-backend
 
-//host : container
+
+# host : container, d is detached
 ```
 
 # Stop container from command prompt
