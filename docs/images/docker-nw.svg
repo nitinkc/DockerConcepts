@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 680" width="100%" height="100%" style="background-color: #0d1117; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <linearGradient id="gradHost" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#161b22" />
+      <stop offset="100%" stop-color="#1f242c" />
+    </linearGradient>
+    <linearGradient id="gradBridge" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1e3a5f" />
+      <stop offset="100%" stop-color="#1b4975" />
+    </linearGradient>
+    <linearGradient id="gradCont" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1c2d27" />
+      <stop offset="100%" stop-color="#13231e" />
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#58a6ff" />
+    </marker>
+    <marker id="arrowGreen" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#3fb950" />
+    </marker>
+    <marker id="arrowOrange" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#f0883e" />
+    </marker>
+  </defs>
+
+  <!-- External World / Internet -->
+  <rect x="320" y="20" width="360" height="50" rx="25" fill="#21262d" stroke="#8957e5" stroke-width="2"/>
+  <text x="500" y="52" fill="#d2a8ff" font-size="16" font-weight="bold" text-anchor="middle">🌐 INTERNET / EXTERNAL TRAFFIC</text>
+
+  <!-- External Uplink Line -->
+  <line x1="500" y1="70" x2="500" y2="120" stroke="#8957e5" stroke-width="3" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+
+  <!-- Host Container -->
+  <rect x="50" y="120" width="900" height="280" rx="12" fill="url(#gradHost)" stroke="#30363d" stroke-width="2"/>
+  <text x="75" y="145" fill="#8b949e" font-size="14" font-weight="bold">🖥️ HOST MACHINE (Primary IP: 192.168.1.100)</text>
+
+  <!-- Host Interface -->
+  <rect x="350" y="150" width="300" height="35" rx="6" fill="#21262d" stroke="#58a6ff" stroke-width="1.5"/>
+  <text x="500" y="173" fill="#58a6ff" font-size="13" font-weight="bold" text-anchor="middle">Physical NIC: eth0 / enp0s3</text>
+
+  <!-- iptables Box -->
+  <rect x="80" y="195" width="350" height="50" rx="6" fill="#2d1c14" stroke="#f0883e" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <text x="95" y="217" fill="#f0883e" font-size="12" font-weight="bold">Flow 3: Ingress DNAT (PREROUTING)</text>
+  <text x="95" y="235" fill="#ffab70" font-size="11">Host:8080 ➔ 172.20.0.2:80</text>
+
+  <rect x="570" y="195" width="350" height="50" rx="6" fill="#2d1c14" stroke="#f0883e" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <text x="585" y="217" fill="#f0883e" font-size="12" font-weight="bold">Flow 2: Egress SNAT (POSTROUTING)</text>
+  <text x="585" y="235" fill="#ffab70" font-size="11">172.20.0.3 ➔ Host IP (MASQUERADE)</text>
+
+  <!-- Linux Bridge -->
+  <rect x="80" y="260" width="840" height="90" rx="8" fill="url(#gradBridge)" stroke="#388bfd" stroke-width="2"/>
+  <text x="500" y="285" fill="#ffffff" font-size="15" font-weight="bold" text-anchor="middle">🌉 Linux Software Bridge (lab-br0: 172.20.0.1/16)</text>
+  <text x="500" y="303" fill="#79c0ff" font-size="12" text-anchor="middle">Docker Embedded DNS Resolver @ 127.0.0.11</text>
+
+  <!-- veth Endpoints on Bridge -->
+  <rect x="180" y="318" width="160" height="24" rx="4" fill="#112233" stroke="#58a6ff" stroke-width="1"/>
+  <text x="260" y="334" fill="#c9d1d9" font-size="11" text-anchor="middle">vethA (Host End)</text>
+
+  <rect x="660" y="318" width="160" height="24" rx="4" fill="#112233" stroke="#58a6ff" stroke-width="1"/>
+  <text x="740" y="334" fill="#c9d1d9" font-size="11" text-anchor="middle">vethB (Host End)</text>
+
+  <!-- Virtual Patch Cables (veth pairs) -->
+  <line x1="260" y1="342" x2="260" y2="460" stroke="#3fb950" stroke-width="3" stroke-dasharray="4,2"/>
+  <line x1="740" y1="342" x2="740" y2="460" stroke="#3fb950" stroke-width="3" stroke-dasharray="4,2"/>
+  <text x="270" y="410" fill="#3fb950" font-size="11" font-weight="bold">veth peer pair</text>
+  <text x="750" y="410" fill="#3fb950" font-size="11" font-weight="bold">veth peer pair</text>
+
+  <!-- Container A -->
+  <rect x="80" y="460" width="380" height="190" rx="10" fill="url(#gradCont)" stroke="#238636" stroke-width="2"/>
+  <text x="100" y="490" fill="#3fb950" font-size="15" font-weight="bold">📦 Container A: web-server</text>
+  <text x="100" y="510" fill="#8b949e" font-size="11">Network Namespace: netns_web</text>
+  <rect x="100" y="525" width="340" height="35" rx="6" fill="#1c2128" stroke="#3fb950" stroke-width="1"/>
+  <text x="270" y="547" fill="#aff5b4" font-size="12" text-anchor="middle">Interface: eth0 (172.20.0.2/16)</text>
+  <rect x="100" y="570" width="340" height="40" rx="6" fill="#21262d"/>
+  <text x="270" y="595" fill="#c9d1d9" font-size="12" text-anchor="middle">Process: NGINX listening on :80</text>
+
+  <!-- Container B -->
+  <rect x="540" y="460" width="380" height="190" rx="10" fill="url(#gradCont)" stroke="#238636" stroke-width="2"/>
+  <text x="560" y="490" fill="#3fb950" font-size="15" font-weight="bold">📦 Container B: client-box</text>
+  <text x="560" y="510" fill="#8b949e" font-size="11">Network Namespace: netns_client</text>
+  <rect x="560" y="525" width="340" height="35" rx="6" fill="#1c2128" stroke="#3fb950" stroke-width="1"/>
+  <text x="730" y="547" fill="#aff5b4" font-size="12" text-anchor="middle">Interface: eth0 (172.20.0.3/16)</text>
+  <rect x="560" y="570" width="340" height="40" rx="6" fill="#21262d"/>
+  <text x="730" y="595" fill="#c9d1d9" font-size="12" text-anchor="middle">Diagnostics: curl / traceroute / ip</text>
+
+  <!-- East-West Communication Line -->
+  <line x1="460" y1="585" x2="540" y2="585" stroke="#f2cc60" stroke-width="3" stroke-dasharray="5,3" marker-start="url(#arrowOrange)" marker-end="url(#arrowOrange)"/>
+  <text x="500" y="575" fill="#f2cc60" font-size="11" font-weight="bold" text-anchor="middle">Flow 1: East-West</text>
+  <text x="500" y="615" fill="#8b949e" font-size="10" text-anchor="middle">(L2 / DNS)</text>
+</svg>
