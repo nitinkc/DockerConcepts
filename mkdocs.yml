@@ -127,3 +127,8 @@ nav:
       - "Lab: springboot-redis": labs/springboot-redis.md
       - "Lab: springboot-redis (visits)": labs/springboot-redis-visits.md
   - "6. Command Lifecycle": 06-command-lifecycle.md
+  - "7. Supply-Chain Security":
+      - 07-supply-chain-security.md
+      - "Lab: distroless-images": labs/distroless-images.md
+      - "Lab: image-scanning": labs/image-scanning.md
+      - "Lab: sbom-and-signing": labs/sbom-and-signing.md
