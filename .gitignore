@@ -1,15 +1,14 @@
 # See https:frontend/frontend/help.github.comfrontend/articlesfrontend/ignoring-filesfrontend/ for more about ignoring files.
 
 # dependencies
-4.frontendWithDockerCompose/node_modules
-4.frontendWithDockerCompose/.pnp
+node_modules/
 .pnp.js
 
 # testing
-4.frontendWithDockerCompose/coverage
+coverage/
 
 # production
-4.frontendWithDockerCompose/build
+src/05-compose/frontend-compose/build
 
 # misc
 .DS_Store

@@ -104,3 +104,26 @@ markdown_extensions:
 
 nav:
   - Home: index.md
+  - "1. Fundamentals & Architecture":
+      - 01-fundamentals-architecture.md
+      - "Lab: container-internals": labs/container-internals.md
+  - "2. Dockerfile & Images":
+      - 02-dockerfile-images.md
+      - "Lab: simple-docker-file": labs/simple-docker-file.md
+      - "Lab: cmd-vs-entrypoint": labs/cmd-vs-entrypoint.md
+      - "Lab: simple-node-backend": labs/simple-node-backend.md
+      - "Lab: args-vs-env": labs/args-vs-env.md
+      - "Lab: multi-stage-build": labs/multi-stage-build.md
+  - "3. Storage & Persistence":
+      - 03-storage-persistence.md
+      - "Lab: volumes-persistence": labs/volumes-persistence.md
+  - "4. Networking":
+      - 04-networking.md
+      - "Lab: bridge-dns-lab": labs/bridge-dns-lab.md
+  - "5. Docker Compose":
+      - 05-docker-compose.md
+      - "Lab: frontend-compose": labs/frontend-compose.md
+      - "Lab: compose-db": labs/compose-db.md
+      - "Lab: springboot-redis": labs/springboot-redis.md
+      - "Lab: springboot-redis (visits)": labs/springboot-redis-visits.md
+  - "6. Command Lifecycle": 06-command-lifecycle.md
